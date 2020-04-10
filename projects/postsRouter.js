@@ -43,8 +43,8 @@ router.get('/:id', (req, res) => {
 })
 
 // Edit Posts
-router.put('/:id', (req, res) => {
-  Project.get()
+router.put('/:id', verify.validatePost, (req, res) => {
+  Posts.update(req.params.id, req.body)
     .then(items => res.status(200).json(items))
     .catch(err => res.status(500).json({ errorMessage: `There was a error while retrieving Posts.`, err }))
 })
